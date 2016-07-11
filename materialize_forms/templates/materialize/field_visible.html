@@ -21,18 +21,21 @@
           {% include "materialize/field_errors.html" %}
         </div>
       {% else %}
-         {% if input_type == "default" %}
-            <div class=" file-field input-field col {{ col }}">
+         {% if input_type == "file" %}
+            <div class="input-field col {{ col }}">
               <div class = "row">
                <div class = "col">
                  <label for="{{ field.auto_id }}">{{ field.label }}</label>
                </div>
-               <div class = "btn col push-s1">
-                 <span>{{field.name}}</span>
-                 {{ field }}
+               <div class = "btn col push-s1 file-field input-field" style = "margin-top:0px;">
+                 <span>{{field.label}}</span>
+                 <input class = "file-path validate" type = "file" id="id_{{field.name}}" name = "{{field.name}}">
+               </div>
+               <div class = "col push-s4">
+                   <a href = "/media/{{field.value}}">Current</a>
+               </div>
                  {% include "materialize/field_help.html" %}
                  {% include "materialize/field_errors.html" %}
-               </div>
               </div>
             </div>
          {%else%}

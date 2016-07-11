@@ -47,6 +47,8 @@ def as_material(field, col='s6'):
         input_type = u'radioset'
     elif isinstance(widget, widgets.Select):
         input_type = u'select'
+    elif isinstance(widget, widgets.ClearableFileInput):
+        input_type = u'file'
     else:
         input_type = u'default'
 
