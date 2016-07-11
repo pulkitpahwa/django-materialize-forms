@@ -1,52 +1,62 @@
 {% if input_type == "checkbox" %}
-    <div style = "padding:10px">
-      {{ field }}
-      <label for="{{ field.auto_id }}">{{ field.label }}</label>
-      {% include "materialize/field_help.html" %}
-    </div>
+  <div style = "padding:10px">
+    {{ field }}
+    <label for="{{ field.auto_id }}">{{ field.label }}</label>
+    {% include "materialize/field_help.html" %}
+  </div>
 {% else %}
-    {% if input_type == "multicheckbox" %}
-        {% include "materialize/field_choices.html" with type="checkbox" %}
-        {% include "materialize/field_help.html" with display="block" %}
+ {% if input_type == "multicheckbox" %}
+   {% include "materialize/field_choices.html" with type="checkbox" %}
+   {% include "materialize/field_help.html" with display="block" %}
+  {% else %}
+    {% if input_type == "radioset" %}
+      {% include "materialize/field_choices.html" with type="radio" %}
+      {% include "materialize/field_help.html" with display="block" %}
     {% else %}
-        {% if input_type == "radioset" %}
-            {% include "materialize/field_choices.html" with type="radio" %}
-            {% include "materialize/field_help.html" with display="block" %}
-        {% else %}
-            {% if input_type == "text" or input_type == "textarea" %}
-            <div class="input-field col {{ col }}">
-                <label for="{{ field.auto_id }}">{{ field.label }}</label>
+      {% if input_type == "text" or input_type == "textarea" %}
+        <div class="input-field col {{ col }}">
+          <label for="{{ field.auto_id }}">{{ field.label }}</label>
+          {{ field }}
+          {% include "materialize/field_help.html" %}
+          {% include "materialize/field_errors.html" %}
+        </div>
+      {% else %}
+         {% if input_type == "default" %}
+            <div class=" file-field input-field col {{ col }}">
+              <div class = "row">
+               <div class = "col">
+                 <label for="{{ field.auto_id }}">{{ field.label }}</label>
+               </div>
+               <div class = "btn col push-s1">
+                 <span>{{field.name}}</span>
+                 {{ field }}
+                 {% include "materialize/field_help.html" %}
+                 {% include "materialize/field_errors.html" %}
+               </div>
+              </div>
+            </div>
+         {%else%}
+            {% if input_type == "select"%}
+              <div class="input-field col {{ col }}" style="padding:10px">
+                  <select name = '{{field.name}}' class=''>
+                   {%for option in field.field.choices%}<option value = "{{option.0}}">{{option.1}} </option>{%endfor%}
+                  </select>
+                <label for="{{ field.auto_id }}" style = "margin-bottom:10px;">{{ field.label }}</label>
+                {% include "materialize/field_help.html" %}
+                {% include "materialize/field_errors.html" %}
+              </div>
+            {%else%}
+              <div class="col {{ col }}" style="padding:10px">
+                <label for="{{ field.auto_id }}" style = "margin-bottom:10px;">{{ field.label }}</label>
+                <br/>
+                <br/>
                 {{ field }}
                 {% include "materialize/field_help.html" %}
                 {% include "materialize/field_errors.html" %}
-            </div>
-            {% else %}
-               {% if input_type == "default" %}
-               {# for file fields#}
-                  <div class=" file-field input-field col {{ col }}">
-                      <div class = "row">
-                         <div class = "col">
-                             <label for="{{ field.auto_id }}">{{ field.label }}</label>
-                         </div>
-                         <div class = "btn col push-s1">
-                             <span>{{field.name}}</span>
-                             {{ field }}
-                             {% include "materialize/field_help.html" %}
-                             {% include "materialize/field_errors.html" %}
-                         </div>
-                      </div>
-                  </div>
-               {%else%}
-                  <div class="col {{ col }}" style="padding:10px">
-                      <label for="{{ field.auto_id }}" style = "margin-bottom:10px;">{{ field.label }}</label>
-                      <br/>
-                      <br/>
-                      {{ field }}
-                      {% include "materialize/field_help.html" %}
-                      {% include "materialize/field_errors.html" %}
-                  </div>
-                {%endif%}
-            {% endif %}
-        {% endif %}
+              </div>
+            {%endif%}
+          {%endif%}
+      {% endif %}
     {% endif %}
+  {% endif %}
 {% endif %}
