@@ -25,15 +25,12 @@
             <div class="input-field col {{ col }}">
               <div class = "row">
                <div class = "col">
-                 <label for="{{ field.auto_id }}">{{ field.label }}</label>
                </div>
-               <div class = "btn col push-s1 file-field input-field" style = "margin-top:0px;">
-                 <span>{{field.label}}</span>
-                 <input class = "file-path validate" type = "file" id="id_{{field.name}}" name = "{{field.name}}">
+               <div class = "btn file-field input-field col" style = "margin-left:10px">
+                   <span>Choose {{field.label}}</span>
+                 <input class = "file-path validate" type = "file" id="id_{{field.name}}" ng-model="{{field.name}}" name = "{{field.name}}">
                </div>
-               <div class = "col push-s4">
-                   <a href = "/media/{{field.value}}">Current</a>
-               </div>
+               <br><br/>
                  {% include "materialize/field_help.html" %}
                  {% include "materialize/field_errors.html" %}
               </div>
@@ -63,3 +60,4 @@
     {% endif %}
   {% endif %}
 {% endif %}
+
