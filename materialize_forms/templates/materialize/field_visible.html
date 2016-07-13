@@ -38,9 +38,7 @@
          {%else%}
             {% if input_type == "select"%}
               <div class="input-field col {{ col }}" style="padding:10px">
-                  <select name = '{{field.name}}' class=''>
-                   {%for option in field.field.choices%}<option value = "{{option.0}}">{{option.1}} </option>{%endfor%}
-                  </select>
+                  {{field}}
                 <label for="{{ field.auto_id }}" style = "margin-bottom:10px;">{{ field.label }}</label>
                 {% include "materialize/field_help.html" %}
                 {% include "materialize/field_errors.html" %}
@@ -60,4 +58,3 @@
     {% endif %}
   {% endif %}
 {% endif %}
-
